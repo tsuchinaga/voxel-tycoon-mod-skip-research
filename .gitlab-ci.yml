@@ -1,0 +1,19 @@
+image: mcr.microsoft.com/dotnet/sdk
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - dotnet build ./SkipResearch
+    - mkdir skip-research
+    - cp mod.json skip-research/
+    - cp preview.png skip-research/
+    - cp SkipResearch/bin/Debug/netstandard2.1/SkipResearch.dll skip-research/
+  artifacts:
+    name: "skip-research"
+    paths:
+      - skip-research
+  only:
+    - master
